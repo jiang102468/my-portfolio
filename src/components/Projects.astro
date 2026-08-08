@@ -1,0 +1,77 @@
+---
+// 作品展示区块：从 content collection 读取项目
+// 项目内容在 src/content/projects/*.md 中维护
+import { getCollection } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => (b.data.year || '').localeCompare(a.data.year || ''),
+);
+---
+
+<section id="work" class="section work">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-index">01 / Work</span>
+      <h2 class="section-title">精选作品</h2>
+    </div>
+
+    {
+      projects.length > 0 ? (
+        <div class="work-grid">
+          {
+            projects.map((project) => (
+              <ProjectCard project={project} />
+            ))
+          }
+        </div>
+      ) : (
+        <p class="empty-hint">
+          暂无作品 — 在 <code>src/content/projects/</code> 中添加 markdown 文件即可展示。
+        </p>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(28px, 4vw, 56px) clamp(24px, 3vw, 40px);
+  }
+
+  /* 首个项目跨两列（大图展示） */
+  .work-grid > :first-child {
+    grid-column: 1 / -1;
+  }
+
+  .work-grid > :first-child .title {
+    font-size: clamp(20px, 2.5vw, 26px);
+  }
+
+  .empty-hint {
+    padding: 48px;
+    text-align: center;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-lg);
+    color: var(--text-secondary);
+  }
+
+  .empty-hint code {
+    font-family: var(--font-mono);
+    background: var(--surface-muted);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+
+  @media (max-width: 720px) {
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+    .work-grid > :first-child {
+      grid-column: auto;
+    }
+  }
+</style>

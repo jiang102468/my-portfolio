@@ -1,0 +1,131 @@
+---
+// 首屏 Hero：名字 + 头衔 + 简介 + CTA
+// 所有文字后期由你替换
+---
+
+<section class="hero">
+  <div class="container hero-inner">
+    <p class="hero-eyebrow fade-up">UI 设计师 · 5 年经验</p>
+
+    <h1 class="hero-title fade-up fade-up-1">
+      你好，我是
+      <span class="hero-name">你的名字</span>
+      <br />
+      我用设计
+      <span class="accent-underline">解决问题</span>。
+    </h1>
+
+    <p class="hero-desc fade-up fade-up-2">
+      专注于界面设计与用户体验，擅长将复杂的业务需求转化为
+      简洁、优雅、可落地的产品设计。曾服务于 B 端、C 端与移动端产品。
+    </p>
+
+    <div class="hero-actions fade-up fade-up-3">
+      <a href="#work" class="btn btn-primary">查看作品</a>
+      <a href="#contact" class="btn btn-outline">联系我</a>
+    </div>
+
+    <dl class="hero-meta fade-up fade-up-4">
+      <div class="meta-item">
+        <dt>所在地</dt>
+        <dd>中国 · 深圳</dd>
+      </div>
+      <div class="meta-item">
+        <dt>邮箱</dt>
+        <dd>
+          <a href="mailto:hello@example.com" class="text-link">hello@example.com</a>
+        </dd>
+      </div>
+      <div class="meta-item">
+        <dt>方向</dt>
+        <dd>UI / UX / 设计系统</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: clamp(72px, 12vw, 140px);
+    padding-bottom: var(--space-section);
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+
+  .hero-title {
+    font-size: clamp(38px, 7vw, 76px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    max-width: 16em;
+  }
+
+  .hero-name {
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .hero-name::before {
+    content: "";
+    position: absolute;
+    inset: auto -10px -4px -10px;
+    height: 40%;
+    background: var(--accent-soft);
+    border-radius: 4px;
+    z-index: -1;
+  }
+
+  .accent-underline {
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    margin-top: 36px;
+    max-width: 560px;
+    font-size: clamp(16px, 2vw, 19px);
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+
+  .hero-actions {
+    margin-top: 44px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta {
+    margin-top: 72px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 32px;
+    max-width: 640px;
+  }
+
+  .meta-item dt {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 6px;
+  }
+
+  .meta-item dd {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 560px) {
+    .hero-meta {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+</style>

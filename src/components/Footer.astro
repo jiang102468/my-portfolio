@@ -1,0 +1,39 @@
+---
+// 页脚：版权 + 年份
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="copyright">© {year} 你的名字 · 保留所有权利</p>
+    <a href="#main" class="back-top">回到顶部 ↑</a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-block: 28px;
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .copyright {
+    font-size: 13.5px;
+    color: var(--text-tertiary);
+  }
+
+  .back-top {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+  }
+
+  .back-top:hover {
+    color: var(--accent);
+  }
+</style>

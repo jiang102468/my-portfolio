@@ -1,0 +1,162 @@
+---
+// 顶部导航：Logo + 锚点导航 + 移动端菜单
+const navItems = [
+  { label: "作品", href: "#work" },
+  { label: "关于", href: "#about" },
+  { label: "联系", href: "#contact" },
+];
+
+// 站点身份（后期在这里改成你的名字）
+const siteName = "YOUR NAME";
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label="返回首页">
+      <span class="logo-mark" aria-hidden="true">{siteName.charAt(0)}</span>
+      <span class="logo-text">{siteName}</span>
+    </a>
+
+    <nav class="nav" aria-label="主导航">
+      <ul>
+        {
+          navItems.map((item) => (
+            <li>
+              <a href={item.href} class="nav-link">{item.label}</a>
+            </li>
+          ))
+        }
+        <li>
+          <a href="#contact" class="nav-cta">找我聊聊</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-h);
+    background: rgba(250, 250, 247, 0.86); /* 浅色 fallback */
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur) var(--ease);
+  }
+
+  .site-header.is-scrolled {
+    border-bottom-color: var(--border);
+  }
+
+  .header-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-mark {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    background: var(--text);
+    color: var(--bg);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .logo-text {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav ul {
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 3vw, 36px);
+  }
+
+  .nav-link {
+    font-size: 15px;
+    color: var(--text-secondary);
+    position: relative;
+  }
+
+  .nav-link:hover {
+    color: var(--text);
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 1.5px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--dur) var(--ease);
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .nav-cta {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--text);
+    transition: all var(--dur) var(--ease);
+  }
+
+  .nav-cta:hover {
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  /* 深色模式 fallback（color-mix 不支持时） */
+  @media (prefers-color-scheme: dark) {
+    .site-header {
+      background: rgba(18, 18, 17, 0.86);
+    }
+  }
+
+  /* 移动端：隐藏导航，仅保留 Logo + CTA */
+  @media (max-width: 560px) {
+    .nav ul li:not(:last-child) {
+      display: none;
+    }
+    .logo-text {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Header 滚动时显示分隔线
+  const header = document.querySelector('.site-header');
+  const onScroll = () => {
+    header.classList.toggle('is-scrolled', window.scrollY > 8);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>

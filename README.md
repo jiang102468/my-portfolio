@@ -1,51 +1,87 @@
-# Astro Starter Kit: Minimal
+# 我的作品集（Astro）
 
-```sh
-npm create astro@latest -- --template minimal
+一个为 UI 设计师设计的作品集网站，基于 [Astro](https://astro.build) 构建。
+现代极简风格，支持自动深色模式，无需任何前端框架，加载快、易维护。
+
+## 🚀 快速开始
+
+```bash
+npm install        # 安装依赖
+npm run dev        # 本地预览 http://localhost:4321
+npm run build      # 构建生产版本到 dist/
+npm run preview    # 本地预览构建结果
 ```
 
-<!-- ASTRO:REMOVE:START -->
+> 国内网络建议使用镜像：`npm install --registry=https://registry.npmmirror.com`
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## 📁 项目结构
 
-<!-- ASTRO:REMOVE:END -->
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
+```
+my-portfolio/
+├── public/                    # 静态资源（图片放这里）
+│   └── projects/              # 项目封面图建议放这里
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/            # 页面组件
+│   │   ├── Header.astro       # 顶部导航
+│   │   ├── Hero.astro         # 首屏大标题
+│   │   ├── Projects.astro     # 作品网格
+│   │   ├── ProjectCard.astro  # 作品卡片
+│   │   ├── About.astro        # 关于我（技能+经历）
+│   │   ├── Contact.astro      # 联系方式
+│   │   └── Footer.astro       # 页脚
+│   ├── content/
+│   │   ├── config.ts          # 作品数据格式定义
+│   │   └── projects/          # ★ 项目内容（markdown）
+│   ├── layouts/
+│   │   └── Layout.astro       # 页面骨架
+│   ├── pages/
+│   │   ├── index.astro        # 首页
+│   │   └── projects/          # 项目详情页（自动生成）
+│   └── styles/
+│       └── global.css         # 设计系统（颜色/字体/间距）
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## ✍️ 如何填充你的内容
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### 1. 个人基本信息
 
-Any static assets, like images, can be placed in the `public/` directory.
+- 名字/头衔：改 `src/components/Header.astro` 顶部的 `siteName`
+- 首屏文案：改 `src/components/Hero.astro`
+- 关于我：改 `src/components/About.astro`（技能列表、经历时间线）
+- 联系方式：改 `src/components/Contact.astro` 和 `src/components/Footer.astro`
 
-## 🧞 Commands
+### 2. 添加作品项目（核心）
 
-All commands are run from the root of the project, from a terminal:
+每篇项目是一个 markdown 文件，放在 `src/content/projects/` 下，
+文件名就是页面地址（如 `project-1.md` → `/projects/project-1/`）。
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+在文件顶部用 `---` 包裹的 frontmatter 填元数据：
 
-## 👀 Want to learn more?
+```markdown
+---
+title: "项目名称"
+description: "一句话简介（显示在卡片上）"
+category: "APP 设计"
+year: "2025"
+tags: ["移动端", "设计系统"]
+cover: "/projects/封面图.png"
+---
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `cover`：封面图，把图片放到 `public/projects/` 目录，填 `/projects/文件名`。**不填则显示渐变占位**
+- 标题下的正文部分：用 Markdown 写项目详情（背景、职责、过程、成果）
+
+复制现有的 `project-1.md` 改内容，或新建文件（记得 frontmatter 格式一致）。
+
+### 3. 自定义配色
+
+所有颜色、字体、圆角都在 `src/styles/global.css` 顶部的 CSS 变量里，
+改 `--accent`（强调色）即可一键换肤，支持自动深色模式。
+
+## 🎨 设计系统速览
+
+- 风格：现代极简 / 编辑式排版 / 大留白
+- 配色：暖白底 + 墨色文字 + 陶土橙强调色（`--accent: #c4552d`）
+- 字体：系统字体栈（苹方/雅黑/Segoe UI 自适应）
+- 响应式：桌面双列作品网格，移动端单列
+- 无障碍：语义化标签、focus 状态、支持 `prefers-reduced-motion`

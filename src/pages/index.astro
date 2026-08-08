@@ -1,17 +1,18 @@
 ---
-
+// 首页：Hero → 精选作品 → 关于 → 联系
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Projects from '../components/Projects.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="作品集 — UI 设计师"
+  description="5 年经验的 UI 设计师作品集，专注于界面设计与用户体验。"
+>
+  <Hero />
+  <Projects />
+  <About />
+  <Contact />
+</Layout>
