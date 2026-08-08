@@ -45,7 +45,7 @@ my-portfolio/
 
 ### 1. 个人基本信息
 
-- 名字/头衔：改 `src/components/Header.astro` 顶部的 `siteName`
+- 名字/头衔：已默认填好 **杨晓文**，如需修改改 `src/components/Header.astro` 顶部的 `siteName`
 - 首屏文案：改 `src/components/Hero.astro`
 - 关于我：改 `src/components/About.astro`（技能列表、经历时间线）
 - 联系方式：改 `src/components/Contact.astro` 和 `src/components/Footer.astro`

@@ -1,6 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 
 // 作品集合 schema：每个项目一个 markdown 文件
+// Astro 5 通用写法（content collections 经典 API，教程最多、最稳定）
 const projects = defineCollection({
   type: 'content',
   schema: z.object({
