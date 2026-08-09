@@ -1,60 +1,34 @@
 ---
 // 关于区块：简介 + 技能 + 经历时间线
-// 文字后期由你替换
-const skills = [
-  "界面设计 UI Design",
-  "交互设计 UX Design",
-  "设计系统 Design System",
-  "产品思维",
-  "Figma / Sketch",
-  "原型与动效 Prototyping",
-];
+// 文案统一在 src/site.config.ts 的 about 中维护
+import { site } from '../site.config';
 
-const timeline = [
-  {
-    period: "2023 — 至今",
-    role: "高级 UI 设计师",
-    company: "某某科技",
-    note: "负责核心产品设计体系搭建与界面设计。",
-  },
-  {
-    period: "2021 — 2023",
-    role: "UI 设计师",
-    company: "某某互联网公司",
-    note: "参与 B 端中台与移动端产品设计。",
-  },
-  {
-    period: "2020 — 2021",
-    role: "初级设计师",
-    company: "某某设计工作室",
-    note: "从 0 到 1 接触完整设计流程。",
-  },
-];
+const { lead, paragraphs, skills, timeline } = site.about;
 ---
 
 <section id="about" class="section about">
   <div class="container">
     <div class="section-head">
-      <span class="section-index">02 / About</span>
+      <span class="eyebrow">02 / About</span>
       <h2 class="section-title">关于我</h2>
     </div>
 
     <div class="about-grid">
       <div class="about-intro">
         <p class="lead">
-          你好，我叫杨晓文，一名拥有 5 年经验的 UI 设计师。我相信好的设计是
-          <em>克制而精准</em> 的——在理解用户与业务之后，用最简洁的形式
-          呈现最清晰的体验。
+          {lead.greeting}
+          <em>{lead.emphasis}</em>
+          {lead.suffix}
         </p>
-        <p>
-          我热衷于设计系统与组件化思维，喜欢通过流程化、可复用的方式
-          提升设计效率与产品一致性。工作之外，我也在持续探索
-          AI 辅助设计与新交互形态的可能性。
-        </p>
+        {
+          paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))
+        }
       </div>
 
       <div class="about-side">
-        <h3 class="side-title">技能</h3>
+        <h3 class="eyebrow side-title">技能</h3>
         <ul class="skill-list">
           {
             skills.map((skill) => (
@@ -63,7 +37,7 @@ const timeline = [
           }
         </ul>
 
-        <h3 class="side-title">经历</h3>
+        <h3 class="eyebrow side-title">经历</h3>
         <ol class="timeline">
           {
             timeline.map((item) => (
@@ -110,10 +84,6 @@ const timeline = [
   }
 
   .side-title {
-    font-size: 13px;
-    font-family: var(--font-mono);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
     color: var(--text-tertiary);
     margin: 0 0 20px;
   }
@@ -129,12 +99,14 @@ const timeline = [
   }
 
   .skill-item {
-    font-size: 14px;
+    font-size: var(--text-md);
     padding: 7px 16px;
     border-radius: var(--radius-pill);
     background: var(--surface);
     border: 1px solid var(--border);
-    transition: all var(--dur) var(--ease);
+    transition:
+      border-color var(--dur) var(--ease),
+      color var(--dur) var(--ease);
   }
 
   .skill-item:hover {
@@ -169,24 +141,25 @@ const timeline = [
 
   .period {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: var(--text-xs);
     color: var(--text-tertiary);
     letter-spacing: 0.04em;
   }
 
   .role {
-    font-size: 15px;
+    font-size: var(--text-md);
     font-weight: 600;
     margin-top: 4px;
   }
 
   .note {
-    font-size: 13.5px;
+    font-size: var(--text-sm);
     color: var(--text-secondary);
     margin-top: 3px;
   }
 
-  @media (max-width: 860px) {
+  /* 平板及以下单列 */
+  @media (max-width: 1024px) {
     .about-grid {
       grid-template-columns: 1fr;
     }

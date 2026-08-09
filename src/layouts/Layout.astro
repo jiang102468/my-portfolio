@@ -2,6 +2,7 @@
 // 页面基础布局：SEO + 全局样式 + Header + Footer
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { site } from '../site.config';
 import '../styles/global.css';
 
 interface Props {
@@ -10,11 +11,11 @@ interface Props {
 }
 
 const {
-  title = "杨晓文 · UI 设计师作品集",
-  description = "5 年经验的 UI 设计师作品集，专注于界面设计与用户体验。",
+  title = site.seo.title,
+  description = site.seo.description,
 } = Astro.props;
 
-const siteTitle = title === "杨晓文 · UI 设计师作品集" ? title : `${title} · 杨晓文`;
+const siteTitle = title === site.seo.title ? title : `${title} · ${site.name}`;
 ---
 
 <!doctype html>

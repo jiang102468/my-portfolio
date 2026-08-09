@@ -12,7 +12,7 @@ const projects = (await getCollection('projects')).sort(
 <section id="work" class="section work">
   <div class="container">
     <div class="section-head">
-      <span class="section-index">01 / Work</span>
+      <span class="eyebrow">01 / Work</span>
       <h2 class="section-title">精选作品</h2>
     </div>
 
@@ -22,7 +22,8 @@ const projects = (await getCollection('projects')).sort(
           {
             projects.map((project) => (
               <ProjectCard project={project} />
-            ))          }
+            ))
+          }
         </div>
       ) : (
         <p class="empty-hint">
@@ -61,11 +62,12 @@ const projects = (await getCollection('projects')).sort(
     font-family: var(--font-mono);
     background: var(--surface-muted);
     padding: 2px 8px;
-    border-radius: 6px;
-    font-size: 13px;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
   }
 
-  @media (max-width: 720px) {
+  /* 平板及以下单列 */
+  @media (max-width: 768px) {
     .work-grid {
       grid-template-columns: 1fr;
     }

@@ -1,28 +1,26 @@
 ---
 // 联系区块：大 CTA + 联系方式
-const socials = [
-  { label: "Email", href: "mailto:hello@example.com" },
-  { label: "Dribbble", href: "https://dribbble.com" },
-  { label: "Behance", href: "https://behance.net" },
-  { label: "GitHub", href: "https://github.com" },
-];
+// 文案与链接统一在 src/site.config.ts 的 contact 中维护
+import { site } from '../site.config';
+
+const { heading, subheading, email, ctaLabel, socials } = site.contact;
 ---
 
 <section id="contact" class="section contact">
   <div class="container">
     <div class="section-head">
-      <span class="section-index">03 / Contact</span>
+      <span class="eyebrow">03 / Contact</span>
       <h2 class="section-title">保持联系</h2>
     </div>
 
     <div class="contact-panel">
       <h3 class="contact-title">
-        有项目想法？
+        {heading}
         <br />
-        <span>让我们一起聊聊。</span>
+        <span>{subheading}</span>
       </h3>
-      <a href="mailto:hello@example.com" class="btn btn-primary contact-btn">
-        发送邮件 →
+      <a href={`mailto:${email}`} class="btn btn-primary contact-btn">
+        {ctaLabel}
       </a>
 
       <ul class="social-list">
@@ -44,7 +42,7 @@ const socials = [
   .contact-panel {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: calc(var(--radius-lg) + 6px);
+    border-radius: var(--radius-xl);
     padding: clamp(40px, 7vw, 88px) clamp(28px, 5vw, 72px);
     position: relative;
     overflow: hidden;
@@ -89,6 +87,6 @@ const socials = [
   }
 
   .social-list a {
-    font-size: 15px;
+    font-size: var(--text-md);
   }
 </style>
