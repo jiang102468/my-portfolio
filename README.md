@@ -21,6 +21,7 @@ my-portfolio/
 ├── public/                    # 静态资源（图片放这里）
 │   └── projects/              # 项目封面图建议放这里
 ├── src/
+│   ├── site.config.ts       # ★ 站点内容配置（名字/邮箱/社交/文案，维护入口）
 │   ├── components/            # 页面组件
 │   │   ├── Header.astro       # 顶部导航
 │   │   ├── Hero.astro         # 首屏大标题
@@ -45,10 +46,11 @@ my-portfolio/
 
 ### 1. 个人基本信息
 
-- 名字/头衔：已默认填好 **杨晓文**，如需修改改 `src/components/Header.astro` 顶部的 `siteName`
-- 首屏文案：改 `src/components/Hero.astro`
-- 关于我：改 `src/components/About.astro`（技能列表、经历时间线）
-- 联系方式：改 `src/components/Contact.astro` 和 `src/components/Footer.astro`
+- 集中入口：**所有站点文案都放在 `src/site.config.ts`**，改这里即可，组件无需改动
+- 名字/邮箱/所在地/方向：`src/site.config.ts` 顶部的基础信息
+- 首屏文案：`src/site.config.ts` 的 `hero` 段
+- 关于我（技能/经历）：`src/site.config.ts` 的 `about` 段
+- 联系方式/社交链接：`src/site.config.ts` 的 `contact` 段
 
 ### 2. 添加作品项目（核心）
 
@@ -77,6 +79,15 @@ cover: "/projects/封面图.png"
 
 所有颜色、字体、圆角都在 `src/styles/global.css` 顶部的 CSS 变量里，
 改 `--accent`（强调色）即可一键换肤，支持自动深色模式。
+
+## 🛠 维护速查（非开发者友好）
+
+- 改站名 / 邮箱 / 社交链接 / 技能 / 经历 / 首屏文案：全部只改 `src/site.config.ts`
+- 新增作品：复制 `src/content/projects/` 里的任何一个 md 文件，改 frontmatter 后，页面和首页会自动出现
+- 换主色调：修改 `src/styles/global.css` 里的 `--accent`
+- 深色模式：同文件 `@media (prefers-color-scheme: dark)` 下的变量
+- 响应式断点约定：以 `src/styles/global.css` 顶部注释为唯一依据（640 / 768 / 1024 三档）
+- 本地验证：`npm run dev` 预览；上线前 `npm run build`（含类型检查）
 
 ## 🎨 设计系统速览
 

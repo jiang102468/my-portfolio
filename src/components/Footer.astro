@@ -1,11 +1,13 @@
 ---
 // 页脚：版权 + 年份
+import { site } from '../site.config';
+
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p class="copyright">© {year} 杨晓文 · 保留所有权利</p>
+    <p class="copyright">© {year} {site.name} · 保留所有权利</p>
     <a href="#main" class="back-top">回到顶部 ↑</a>
   </div>
 </footer>

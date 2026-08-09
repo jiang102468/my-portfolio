@@ -2,17 +2,10 @@
 // 作品卡片：图片 + 标题 + 类别 + 年份
 // cover 图片放在 public/projects/ 下，md 里填相对路径
 // 未提供图片时显示渐变占位
+import type { CollectionEntry } from 'astro:content';
+
 interface Props {
-  project: {
-    slug: string;
-    data: {
-      title: string;
-      category?: string;
-      year?: string;
-      cover?: string;
-      description?: string;
-    };
-  };
+  project: CollectionEntry<'projects'>;
 }
 
 const { project } = Astro.props;
@@ -161,7 +154,7 @@ const { title, category, year, cover, description } = project.data;
     overflow: hidden;
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 640px) {
     .meta-row {
       flex-direction: column;
       align-items: flex-start;

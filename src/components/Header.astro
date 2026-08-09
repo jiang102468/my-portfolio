@@ -1,13 +1,8 @@
 ---
-// 顶部导航：Logo + 锚点导航 + 移动端菜单
-const navItems = [
-  { label: "作品", href: "#work" },
-  { label: "关于", href: "#about" },
-  { label: "联系", href: "#contact" },
-];
+// 顶部导航：品牌 + 锚点导航 + 移动端汉堡菜单
+import { site } from '../site.config';
 
-// 站点身份（你的名字，改这里）
-const siteName = "杨晓文";
+const { name: siteName, nav } = site;
 ---
 
 <header class="site-header">
@@ -17,17 +12,32 @@ const siteName = "杨晓文";
       <span class="logo-text">{siteName}</span>
     </a>
 
-    <nav class="nav" aria-label="主导航">
+    <button
+      type="button"
+      class="nav-toggle"
+      data-nav-toggle
+      aria-label="打开菜单"
+      aria-expanded="false"
+      aria-controls="site-nav"
+    >
+      <span class="nav-toggle-line" aria-hidden="true"></span>
+      <span class="nav-toggle-line" aria-hidden="true"></span>
+      <span class="nav-toggle-line" aria-hidden="true"></span>
+    </button>
+
+    <nav id="site-nav" class="nav" data-nav aria-label="主导航">
       <ul>
         {
-          navItems.map((item) => (
+          nav.items.map((item) => (
             <li>
-              <a href={item.href} class="nav-link">{item.label}</a>
+              <a href={item.href} class="nav-link">
+                {item.label}
+              </a>
             </li>
           ))
         }
         <li>
-          <a href="#contact" class="nav-cta">找我聊聊</a>
+          <a href={nav.cta.href} class="nav-cta">{nav.cta.label}</a>
         </li>
       </ul>
     </nav>
@@ -133,6 +143,37 @@ const siteName = "杨晓文";
     color: var(--bg);
   }
 
+  /* 汉堡按钮：桌面端隐藏 */
+  .nav-toggle {
+    display: none;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin-right: -8px;
+  }
+
+  .nav-toggle-line {
+    display: block;
+    width: 20px;
+    height: 2px;
+    margin: 2px 0;
+    border-radius: 2px;
+    background: var(--text);
+    transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+  }
+
+  .nav-toggle.is-active .nav-toggle-line:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .nav-toggle.is-active .nav-toggle-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.is-active .nav-toggle-line:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
   /* 深色模式 fallback（color-mix 不支持时） */
   @media (prefers-color-scheme: dark) {
     .site-header {
@@ -140,25 +181,95 @@ const siteName = "杨晓文";
     }
   }
 
-  /* 移动端：隐藏导航，仅保留 Logo + CTA */
-  @media (max-width: 560px) {
-    .nav ul li:not(:last-child) {
-      display: none;
-    }
+  /* 移动端：汉堡菜单 + 下拉面板 */
+  @media (max-width: 640px) {
     .logo-text {
       display: none;
+    }
+
+    .nav-toggle {
+      display: grid;
+    }
+
+    .nav {
+      position: absolute;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      display: none;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.06);
+    }
+
+    .nav.is-open {
+      display: block;
+    }
+
+    .nav ul {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 8px var(--gutter) 20px;
+    }
+
+    .nav li {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav li:last-child {
+      border-bottom: none;
+    }
+
+    .nav-link,
+    .nav-cta {
+      display: block;
+      padding: 14px 4px;
+      border-radius: var(--radius-md);
+      font-size: 16px;
+    }
+
+    .nav-cta {
+      margin-top: 6px;
+      text-align: center;
+      background: var(--text);
+      color: var(--bg);
+      border: none;
     }
   }
 </style>
 
 <script>
-  // Header 滚动时显示分隔线
+  // Header 滚动状态 + 移动端汉堡菜单
   const header = document.querySelector('.site-header');
+  const toggle = document.querySelector('[data-nav-toggle]');
+  const nav = document.querySelector('[data-nav]');
+
   if (header) {
     const onScroll = () => {
       header.classList.toggle('is-scrolled', window.scrollY > 8);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+  }
+
+  if (toggle && nav) {
+    const setOpen = (open) => {
+      nav.classList.toggle('is-open', open);
+      toggle.classList.toggle('is-active', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? '关闭菜单' : '打开菜单');
+    };
+
+    toggle.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
+    nav.addEventListener('click', (event) => {
+      if (event.target instanceof Element && event.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('click', (event) => {
+      if (header && event.target instanceof Node && !header.contains(event.target)) setOpen(false);
+    });
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
   }
 </script>

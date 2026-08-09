@@ -22,7 +22,8 @@ const projects = (await getCollection('projects')).sort(
           {
             projects.map((project) => (
               <ProjectCard project={project} />
-            ))          }
+            ))
+          }
         </div>
       ) : (
         <p class="empty-hint">
@@ -65,7 +66,8 @@ const projects = (await getCollection('projects')).sort(
     font-size: 13px;
   }
 
-  @media (max-width: 720px) {
+  /* 平板及以下单列 */
+  @media (max-width: 768px) {
     .work-grid {
       grid-template-columns: 1fr;
     }

@@ -1,45 +1,45 @@
 ---
 // 首屏 Hero：名字 + 头衔 + 简介 + CTA
-// 所有文字后期由你替换
+// 文案统一在 src/site.config.ts 的 hero 中维护
+import { site } from '../site.config';
+
+const { hero } = site;
 ---
 
 <section class="hero">
   <div class="container hero-inner">
-    <p class="hero-eyebrow fade-up">UI 设计师 · 5 年经验</p>
+    <p class="hero-eyebrow fade-up">{hero.eyebrow}</p>
 
     <h1 class="hero-title fade-up fade-up-1">
-      你好，我是
-      <span class="hero-name">杨晓文</span>
+      {hero.intro}
+      <span class="hero-name">{hero.name}</span>
       <br />
-      我用设计
-      <span class="accent-underline">解决问题</span>。
+      {hero.titlePrefix}
+      <span class="accent-underline">{hero.highlight}</span>。
     </h1>
 
-    <p class="hero-desc fade-up fade-up-2">
-      专注于界面设计与用户体验，擅长将复杂的业务需求转化为
-      简洁、优雅、可落地的产品设计。曾服务于 B 端、C 端与移动端产品。
-    </p>
+    <p class="hero-desc fade-up fade-up-2">{hero.description}</p>
 
     <div class="hero-actions fade-up fade-up-3">
-      <a href="#work" class="btn btn-primary">查看作品</a>
-      <a href="#contact" class="btn btn-outline">联系我</a>
+      <a href={hero.primaryCta.href} class="btn btn-primary">{hero.primaryCta.label}</a>
+      <a href={hero.secondaryCta.href} class="btn btn-outline">{hero.secondaryCta.label}</a>
     </div>
 
     <dl class="hero-meta fade-up fade-up-4">
-      <div class="meta-item">
-        <dt>所在地</dt>
-        <dd>中国 · 深圳</dd>
-      </div>
-      <div class="meta-item">
-        <dt>邮箱</dt>
-        <dd>
-          <a href="mailto:hello@example.com" class="text-link">hello@example.com</a>
-        </dd>
-      </div>
-      <div class="meta-item">
-        <dt>方向</dt>
-        <dd>UI / UX / 设计系统</dd>
-      </div>
+      {
+        hero.meta.map((meta) => (
+          <div class="meta-item">
+            <dt>{meta.label}</dt>
+            <dd>
+              {meta.href ? (
+                <a href={meta.href} class="text-link">{meta.value}</a>
+              ) : (
+                meta.value
+              )}
+            </dd>
+          </div>
+        ))
+      }
     </dl>
   </div>
 </section>
@@ -122,7 +122,7 @@
     font-weight: 500;
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 640px) {
     .hero-meta {
       grid-template-columns: 1fr;
       gap: 20px;
