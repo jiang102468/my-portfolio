@@ -82,6 +82,26 @@
 - **768px**：平板 — 作品网格切单列
 - **1024px**：屏幕较宽 / 平板横屏 — 关于区切单列
 
+## 汉堡菜单规范（Header）
+
+移动端（≤640px）汉堡按钮与左侧 logo 遵循**视觉同源**原则：两个元素用同一套
+容器语言（尺寸 / 圆角 / 边框），只在"图形"上表达差异。
+
+| 维度 | 规范 | 依据 |
+| --- | --- | --- |
+| 视觉尺寸 | 32×32，与 `.logo-mark` 一致 | 视觉对称，同一容器语言 |
+| 圆角 | `--radius-md`（10px） | 与 logo-mark 相同 |
+| 边框 | `1px solid var(--border)`，hover 变 `--accent` | 复用描边语言（同 `.tag-year`） |
+| 触控热区 | `::before { inset: -6px }` 扩到 44×44 | WCAG 2.2 AA 建议 ≥44px，热区膨胀不影响视觉 |
+| 线条 | 3 条 16×2px，`--radius-pill` 圆角，`gap: 5px` | 16px 与 logo 内 14px 汉字视觉宽度匹配 |
+| 激活态 | 墨色底 `--text` + 白色 X 线（`--bg`） | 与 logo-mark（墨底）形成配对印章感 |
+| 展开动画 | 上线 `translateY(7px) rotate(45deg)`，下线对称，中线淡出 | 7px = gap 5px + 线高 2px 的中心距，精确重合 |
+| 布局 | `inline-flex column`，`justify-content: center`，固定 gap | 不用 space-around，避免不同容器高度下位移失准 |
+| 无障碍 | `aria-expanded` / `aria-controls`，Escape 关闭，点外部关闭 | 见"无障碍约定" |
+
+> 原则：**视觉尺寸与 logo 对齐，触控尺寸对人手负责**。永远不要为加大热区
+> 而放大视觉元素——用 `::before` 伪元素扩展即可。
+
 ## 无障碍约定
 
 - 保留语义化标签（`nav` / `main` / `h1-6` 等），移动端菜单有 `aria-expanded`

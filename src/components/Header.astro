@@ -147,22 +147,29 @@ const { name: siteName, nav } = site;
     color: var(--bg);
   }
 
-  /* 汉堔按钮：桌面端隐藏，移动端显示为 44px 点击面积 */
+  /* 汉堡按钮：视觉尺寸与 logo-mark 同源（32px 圆角方块），触控热区 44px */
   .nav-toggle {
+    position: relative;
     display: none;
     box-sizing: border-box;
-    width: 44px;
-    height: 44px;
-    margin-right: -8px;
+    width: 32px;
+    height: 32px;
     padding: 0;
     border: 1px solid var(--border);
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-md); /* 与 logo-mark 一致的 10px 圆角 */
     background: var(--surface);
     -webkit-tap-highlight-color: transparent;
     transition:
       border-color var(--dur) var(--ease),
       background-color var(--dur) var(--ease),
       transform var(--dur-fast) var(--ease);
+  }
+
+  /* 伪元素把触控热区扩到 44×44（WCAG 2.2 建议 ≥44px），视觉尺寸不膨胀 */
+  .nav-toggle::before {
+    content: "";
+    position: absolute;
+    inset: -6px; /* 32 + 6×2 = 44 */
   }
 
   .nav-toggle:hover {
@@ -173,6 +180,7 @@ const { name: siteName, nav } = site;
     transform: scale(0.94);
   }
 
+  /* 激活态翻转成墨色底，与左侧 logo-mark 的墨色方块形成配对 */
   .nav-toggle.is-active {
     border-color: var(--text);
     background: var(--text);
@@ -180,7 +188,7 @@ const { name: siteName, nav } = site;
 
   .nav-toggle-line {
     display: block;
-    width: 20px;
+    width: 16px; /* 与 logo 内 14px 汉字的视觉宽度匹配 */
     height: 2px;
     border-radius: var(--radius-pill);
     background: var(--text);
@@ -191,7 +199,7 @@ const { name: siteName, nav } = site;
   }
 
   .nav-toggle.is-active .nav-toggle-line:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
+    transform: translateY(7px) rotate(45deg); /* 7px = 线距 gap5 + 线高2 的中心距 */
   }
 
   .nav-toggle.is-active .nav-toggle-line {
@@ -203,7 +211,7 @@ const { name: siteName, nav } = site;
   }
 
   .nav-toggle.is-active .nav-toggle-line:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
+    transform: translateY(-7px) rotate(-45deg);
   }
 
   /* 移动端：汉堡菜单 + 下拉面板 */
@@ -215,8 +223,9 @@ const { name: siteName, nav } = site;
     .nav-toggle {
       display: inline-flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
+      gap: 5px;
     }
 
     .nav {
@@ -282,7 +291,7 @@ const { name: siteName, nav } = site;
   }
 
   if (toggle && nav) {
-    const setOpen = (open) => {
+    const setOpen = (open: boolean) => {
       nav.classList.toggle('is-open', open);
       toggle.classList.toggle('is-active', open);
       toggle.setAttribute('aria-expanded', String(open));
