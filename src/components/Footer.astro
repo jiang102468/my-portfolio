@@ -26,13 +26,18 @@ const year = new Date().getFullYear();
   }
 
   .copyright {
-    font-size: 13.5px;
+    font-size: var(--text-sm);
     color: var(--text-tertiary);
   }
 
   .back-top {
-    font-size: 13.5px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;            /* WCAG 2.2 AA 触控目标 ≥40px */
+    gap: 6px;
+    font-size: var(--text-sm);
     color: var(--text-secondary);
+    transition: color var(--dur) var(--ease);
   }
 
   .back-top:hover {

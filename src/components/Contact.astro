@@ -9,7 +9,7 @@ const { heading, subheading, email, ctaLabel, socials } = site.contact;
 <section id="contact" class="section contact">
   <div class="container">
     <div class="section-head">
-      <span class="section-index">03 / Contact</span>
+      <span class="eyebrow">03 / Contact</span>
       <h2 class="section-title">保持联系</h2>
     </div>
 
@@ -42,7 +42,7 @@ const { heading, subheading, email, ctaLabel, socials } = site.contact;
   .contact-panel {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: calc(var(--radius-lg) + 6px);
+    border-radius: var(--radius-xl);
     padding: clamp(40px, 7vw, 88px) clamp(28px, 5vw, 72px);
     position: relative;
     overflow: hidden;
@@ -87,6 +87,6 @@ const { heading, subheading, email, ctaLabel, socials } = site.contact;
   }
 
   .social-list a {
-    font-size: 15px;
+    font-size: var(--text-md);
   }
 </style>

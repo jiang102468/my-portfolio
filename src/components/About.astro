@@ -9,7 +9,7 @@ const { lead, paragraphs, skills, timeline } = site.about;
 <section id="about" class="section about">
   <div class="container">
     <div class="section-head">
-      <span class="section-index">02 / About</span>
+      <span class="eyebrow">02 / About</span>
       <h2 class="section-title">关于我</h2>
     </div>
 
@@ -28,7 +28,7 @@ const { lead, paragraphs, skills, timeline } = site.about;
       </div>
 
       <div class="about-side">
-        <h3 class="side-title">技能</h3>
+        <h3 class="eyebrow side-title">技能</h3>
         <ul class="skill-list">
           {
             skills.map((skill) => (
@@ -37,7 +37,7 @@ const { lead, paragraphs, skills, timeline } = site.about;
           }
         </ul>
 
-        <h3 class="side-title">经历</h3>
+        <h3 class="eyebrow side-title">经历</h3>
         <ol class="timeline">
           {
             timeline.map((item) => (
@@ -84,10 +84,6 @@ const { lead, paragraphs, skills, timeline } = site.about;
   }
 
   .side-title {
-    font-size: 13px;
-    font-family: var(--font-mono);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
     color: var(--text-tertiary);
     margin: 0 0 20px;
   }
@@ -103,12 +99,14 @@ const { lead, paragraphs, skills, timeline } = site.about;
   }
 
   .skill-item {
-    font-size: 14px;
+    font-size: var(--text-md);
     padding: 7px 16px;
     border-radius: var(--radius-pill);
     background: var(--surface);
     border: 1px solid var(--border);
-    transition: all var(--dur) var(--ease);
+    transition:
+      border-color var(--dur) var(--ease),
+      color var(--dur) var(--ease);
   }
 
   .skill-item:hover {
@@ -143,19 +141,19 @@ const { lead, paragraphs, skills, timeline } = site.about;
 
   .period {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: var(--text-xs);
     color: var(--text-tertiary);
     letter-spacing: 0.04em;
   }
 
   .role {
-    font-size: 15px;
+    font-size: var(--text-md);
     font-weight: 600;
     margin-top: 4px;
   }
 
   .note {
-    font-size: 13.5px;
+    font-size: var(--text-sm);
     color: var(--text-secondary);
     margin-top: 3px;
   }

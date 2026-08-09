@@ -16,7 +16,7 @@ const { title, category, year, cover, description } = project.data;
   <div class="cover">
     {
       cover ? (
-        <img src={cover} alt={title} loading="lazy" />
+        <img src={cover} alt={title} width="480" height="360" loading="lazy" style="aspect-ratio: 4 / 3; width: 100%; object-fit: cover;" />
       ) : (
         <div class="cover-placeholder" aria-hidden="true">
           <span class="placeholder-glyph">{title.charAt(0)}</span>
@@ -56,7 +56,8 @@ const { title, category, year, cover, description } = project.data;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s var(--ease);
+    aspect-ratio: 4 / 3;          /* 锁定比例防 CLS */
+    transition: transform var(--dur-slow) var(--ease);
   }
 
   .cover-placeholder {
@@ -85,22 +86,34 @@ const { title, category, year, cover, description } = project.data;
     display: grid;
     place-items: center;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.92);
-    color: #1a1a18;
+    background: var(--surface);
+    color: var(--text);
     font-size: 18px;
     opacity: 0;
     transform: translateY(6px);
-    transition: all var(--dur) var(--ease);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+    transition:
+      opacity var(--dur) var(--ease),
+      transform var(--dur) var(--ease);
+    box-shadow: var(--shadow-sm);
   }
 
-  .project-card:hover .cover img {
+  .project-card:hover .cover img,
+  .project-card:focus-within .cover img {
     transform: scale(1.04);
   }
 
-  .project-card:hover .cover-arrow {
+  .project-card:hover .cover-arrow,
+  .project-card:focus-within .cover-arrow {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* 触屏设备无 hover：常显轻提示，避免隐藏可点击信号 */
+  @media (hover: none) {
+    .cover-arrow {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .meta {
@@ -115,7 +128,7 @@ const { title, category, year, cover, description } = project.data;
   }
 
   .title {
-    font-size: 18px;
+    font-size: var(--text-lg);
     font-weight: 600;
     letter-spacing: -0.01em;
   }
@@ -130,23 +143,9 @@ const { title, category, year, cover, description } = project.data;
     flex-shrink: 0;
   }
 
-  .tag {
-    font-size: 12px;
-    font-family: var(--font-mono);
-    color: var(--text-secondary);
-    background: var(--surface-muted);
-    padding: 3px 10px;
-    border-radius: var(--radius-pill);
-  }
-
-  .tag-year {
-    background: transparent;
-    border: 1px solid var(--border);
-  }
-
   .desc {
     margin-top: 6px;
-    font-size: 14px;
+    font-size: var(--text-md);
     color: var(--text-secondary);
     display: -webkit-box;
     -webkit-line-clamp: 2;

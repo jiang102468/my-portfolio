@@ -12,6 +12,8 @@
   组件只负责展示，从该文件读取数据，不要再到组件里写散落的硬编码文案
 - 样式：设计 token（颜色/圆角/动效）集中在 `src/styles/global.css` 顶部，
   深色模式在同文件 `@media (prefers-color-scheme: dark)` 中覆盖变量
+- 设计规范：`DESIGN-SYSTEM.md` 是设计规范文档（token / 组件库 / 断点 / 无障碍），
+  组件库全局类（`.btn` / `.tag` / `.eyebrow` 等）在 `global.css` 维护，组件内不要重复定义
 
 ## 必须遵守的约定
 

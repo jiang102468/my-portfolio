@@ -2,11 +2,18 @@
    Design System — 作品集视觉设计规范
    风格：现代极简 / 编辑式排版 / 大留白
    配色：暖白底 + 墨色文字 + 陶土橙强调色
-  支持：自动深色模式（跟随系统）
-  响应式断点规范（改组件媒体查询时与这些档位保持一致）：
-    640px —— 手机：汉堡菜单、单列内容
-    768px —— 平板：作品网格切换单列
-    1024px —— 屏幕较宽/平板横屏：关于区切换单列
+   支持：自动深色模式（跟随系统）
+
+   响应式断点规范（改组件媒体查询时与这些档位保持一致）：
+     640px —— 手机：汉堡菜单、单列内容
+     768px —— 平板：作品网格切换单列
+     1024px —— 屏幕较宽/平板横屏：关于区切换单列
+
+   组件库（全局类，组件内复用，避免重复定义）：
+     .eyebrow   小节标签：首屏头衔 / 分区序号 / 侧栏小标题
+     .tag       小标签：作品类别、年份、详情页标签
+     .btn       按钮：.btn-primary / .btn-outline
+     .text-link 带下划线动画的文本链接
    ============================================================ */
 
 :root {
@@ -18,21 +25,33 @@
   --surface-muted: #f2f2ec;    /* 弱表面（占位等） */
   --text: #1a1a18;             /* 主文字（墨色） */
   --text-secondary: #6e6e68;   /* 次级文字 */
-  --text-tertiary: #a2a29b;    /* 弱文字/提示 */
-  --accent: #c4552d;           /* 强调色（陶土橙） */
-  --accent-strong: #a34321;    /* 强调色深 */
+  --text-tertiary: #6d6d62;    /* 弱文字/提示（13px 下 ≥4.5:1） */
+  --accent: #b44720;           /* 强调色（陶土橙，13px 小字也 ≥4.5:1） */
+  --accent-strong: #a34321;    /* 强调色深（hover/按压） */
   --accent-soft: #f7e9e2;      /* 强调色浅底 */
   --border: #e7e7e1;           /* 分隔线/边框 */
 
+  /* --- 阴影 --- */
+  --shadow-sm: 0 4px 18px rgb(0 0 0 / 0.10);   /* 悬浮元素：封面箭头 */
+  --shadow-md: 0 16px 32px rgb(0 0 0 / 0.08);  /* 下拉面板 */
+
   /* --- 圆角 --- */
-  --radius-lg: 18px;
+  --radius-sm: 6px;
   --radius-md: 10px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
   --radius-pill: 999px;
 
   /* --- 字体 --- */
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI",
     "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  /* --- 字号阶梯 --- */
+  --text-xs: 12px;  /* 标签、时间、元信息 */
+  --text-sm: 13px;  /* 说明性小字（页脚、标注、注） */
+  --text-md: 15px;  /* 次级正文（导航、卡片描述、技能） */
+  --text-lg: 18px;  /* 卡片标题 / 小标题 */
 
   /* --- 布局 --- */
   --container: 1160px;
@@ -43,6 +62,8 @@
   /* --- 动效 --- */
   --ease: cubic-bezier(0.33, 1, 0.68, 1);
   --dur: 0.28s;
+  --dur-fast: 0.15s;  /* 按压反馈等短动效 */
+  --dur-slow: 0.6s;  /* 图片缩放等长动效 */
 }
 
 /* --- 深色模式 --- */
@@ -53,11 +74,13 @@
     --surface-muted: #232322;
     --text: #f2f2ed;
     --text-secondary: #a8a8a1;
-    --text-tertiary: #6c6c66;
+    --text-tertiary: #8a8a80;
     --accent: #e0764a;
-    --accent-strong: #f08a5d;
+    --accent-strong: #b8502e;   /* 深色下 hover（保持白字对比度） */
     --accent-soft: #33231b;
     --border: #2a2a28;
+    --shadow-sm: 0 4px 18px rgb(0 0 0 / 0.45);
+    --shadow-md: 0 16px 32px rgb(0 0 0 / 0.35);
   }
 }
 
@@ -111,13 +134,12 @@ ul, ol {
 
 ::selection {
   background: var(--accent);
-  color: #fff;
+  color: var(--bg);
 }
 
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 2px;
 }
 
 /* ============================================================
@@ -134,21 +156,38 @@ ul, ol {
   padding-block: var(--space-section);
 }
 
+/* 小节标签：首屏头衔 / 分区序号 / 侧栏小标题 */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* 小标签：类别 / 年份 / 详情页标签 */
+.tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  background: var(--surface-muted);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.tag-year {
+  background: transparent;
+  border: 1px solid var(--border);
+}
+
 /* Section 标题（编辑式排版，带序号标签） */
 .section-head {
   display: flex;
   align-items: baseline;
   gap: 16px;
   margin-bottom: clamp(36px, 6vw, 64px);
-}
-
-.section-index {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.12em;
-  color: var(--accent);
-  text-transform: uppercase;
-  flex-shrink: 0;
 }
 
 .section-title {
@@ -167,10 +206,14 @@ ul, ol {
   gap: 8px;
   padding: 12px 26px;
   border-radius: var(--radius-pill);
-  font-size: 15px;
+  font-size: var(--text-md);
   font-weight: 500;
   letter-spacing: 0.01em;
-  transition: all var(--dur) var(--ease);
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
   white-space: nowrap;
 }
 
@@ -180,7 +223,7 @@ ul, ol {
 }
 
 .btn-primary:hover {
-  background: var(--accent);
+  background: var(--accent-strong);
   color: #fff;
   transform: translateY(-2px);
 }
@@ -195,9 +238,11 @@ ul, ol {
   transform: translateY(-2px);
 }
 
-/* 文本链接（带下划线动画） */
+/* 文本链接（带下划线动画）——含触控放大的 tap 区域 + 键盘聚焦同步 */
 .text-link {
   position: relative;
+  display: inline-block;          /* 便于 padding 扩大点击面 */
+  padding: 2px 2px 4px;
   color: var(--text);
   font-weight: 500;
 }
@@ -215,7 +260,8 @@ ul, ol {
   transition: transform var(--dur) var(--ease);
 }
 
-.text-link:hover::after {
+.text-link:hover::after,
+.text-link:focus-visible::after {
   transform: scaleX(1);
   transform-origin: left;
 }

@@ -8,7 +8,7 @@ const { hero } = site;
 
 <section class="hero">
   <div class="container hero-inner">
-    <p class="hero-eyebrow fade-up">{hero.eyebrow}</p>
+    <p class="eyebrow hero-eyebrow fade-up">{hero.eyebrow}</p>
 
     <h1 class="hero-title fade-up fade-up-1">
       {hero.intro}
@@ -29,7 +29,7 @@ const { hero } = site;
       {
         hero.meta.map((meta) => (
           <div class="meta-item">
-            <dt>{meta.label}</dt>
+            <dt class="eyebrow meta-label">{meta.label}</dt>
             <dd>
               {meta.href ? (
                 <a href={meta.href} class="text-link">{meta.value}</a>
@@ -51,11 +51,6 @@ const { hero } = site;
   }
 
   .hero-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
     margin-bottom: 28px;
   }
 
@@ -78,7 +73,7 @@ const { hero } = site;
     inset: auto -10px -4px -10px;
     height: 40%;
     background: var(--accent-soft);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     z-index: -1;
   }
 
@@ -109,16 +104,13 @@ const { hero } = site;
     max-width: 640px;
   }
 
-  .meta-item dt {
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+  .meta-label {
     color: var(--text-tertiary);
     margin-bottom: 6px;
   }
 
   .meta-item dd {
-    font-size: 15px;
+    font-size: var(--text-md);
     font-weight: 500;
   }
 

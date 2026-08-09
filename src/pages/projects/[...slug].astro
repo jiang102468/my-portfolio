@@ -45,7 +45,7 @@ const { title, description, category, year, cover, tags, link } = project.data;
 
       {
         cover ? (
-          <img src={cover} alt={title} class="project-cover" />
+          <img src={cover} alt={title} class="project-cover" width="1280" height="720" style="aspect-ratio: 16 / 9; width: 100%; height: auto; object-fit: cover;" />
         ) : (
           <div class="cover-placeholder" aria-hidden="true">
             <span>{title.charAt(0)}</span>
@@ -66,8 +66,11 @@ const { title, description, category, year, cover, tags, link } = project.data;
   }
 
   .back-link {
-    display: inline-block;
-    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;            /* WCAG 2.2 AA 触控目标 ≥40px */
+    gap: 6px;
+    font-size: var(--text-md);
     color: var(--text-secondary);
     margin-bottom: 40px;
     transition: color var(--dur) var(--ease);
@@ -86,20 +89,6 @@ const { title, description, category, year, cover, tags, link } = project.data;
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
-  }
-
-  .tag {
-    font-size: 12.5px;
-    font-family: var(--font-mono);
-    color: var(--text-secondary);
-    background: var(--surface-muted);
-    padding: 4px 12px;
-    border-radius: var(--radius-pill);
-  }
-
-  .tag-year {
-    background: transparent;
-    border: 1px solid var(--border);
   }
 
   .project-title {
@@ -130,6 +119,7 @@ const { title, description, category, year, cover, tags, link } = project.data;
 
   .project-cover {
     width: 100%;
+    aspect-ratio: 16 / 9;         /* 锁定比例防 CLS */
     border-radius: var(--radius-lg);
     border: 1px solid var(--border);
     margin-bottom: 64px;
@@ -213,7 +203,7 @@ const { title, description, category, year, cover, tags, link } = project.data;
     font-size: 0.9em;
     background: var(--surface-muted);
     padding: 2px 7px;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
   }
 
   .project-body pre {
@@ -228,7 +218,7 @@ const { title, description, category, year, cover, tags, link } = project.data;
   .project-body pre code {
     background: transparent;
     padding: 0;
-    font-size: 13.5px;
+    font-size: var(--text-sm);
     line-height: 1.7;
   }
 
