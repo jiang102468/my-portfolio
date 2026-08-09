@@ -161,7 +161,7 @@ const { name: siteName, nav } = site;
     transition:
       border-color var(--dur) var(--ease),
       background-color var(--dur) var(--ease),
-      transform 0.15s var(--ease);
+      transform var(--dur-fast) var(--ease);
   }
 
   .nav-toggle:hover {
@@ -179,9 +179,9 @@ const { name: siteName, nav } = site;
 
   .nav-toggle-line {
     display: block;
-    width: 18px;
+    width: 20px;
     height: 2px;
-    margin: 1.5px 0;
+    margin: 4px 0;
     border-radius: var(--radius-pill);
     background: var(--text);
     transition:
@@ -190,13 +190,8 @@ const { name: siteName, nav } = site;
       background-color var(--dur) var(--ease);
   }
 
-  /* 中间一杠稍短，形成有节奏的图标，而非三根等长线段 */
-  .nav-toggle-line:nth-child(2) {
-    width: 12px;
-  }
-
   .nav-toggle.is-active .nav-toggle-line:nth-child(1) {
-    transform: translateY(5px) rotate(45deg);
+    transform: translateY(6px) rotate(45deg);
   }
 
   .nav-toggle.is-active .nav-toggle-line {
@@ -208,7 +203,7 @@ const { name: siteName, nav } = site;
   }
 
   .nav-toggle.is-active .nav-toggle-line:nth-child(3) {
-    transform: translateY(-5px) rotate(-45deg);
+    transform: translateY(-6px) rotate(-45deg);
   }
 
   /* 移动端：汉堡菜单 + 下拉面板 */

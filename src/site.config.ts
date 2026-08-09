@@ -72,11 +72,11 @@ export const site: {
 
   nav: {
     items: [
-      { label: "作品", href: "#work" },
-      { label: "关于", href: "#about" },
-      { label: "联系", href: "#contact" },
+      { label: "作品", href: "/#work" },
+      { label: "关于", href: "/#about" },
+      { label: "联系", href: "/#contact" },
     ],
-    cta: { label: "找我聊聊", href: "#contact" },
+    cta: { label: "找我聊聊", href: "/#contact" },
   },
 
   hero: {
