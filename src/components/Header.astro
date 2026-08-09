@@ -147,13 +147,14 @@ const { name: siteName, nav } = site;
     color: var(--bg);
   }
 
-  /* 汉堡按钮：桌面端隐藏 */
+  /* 汉堔按钮：桌面端隐藏，移动端显示为 44px 点击面积 */
   .nav-toggle {
     display: none;
-    place-items: center;
+    box-sizing: border-box;
     width: 44px;
     height: 44px;
     margin-right: -8px;
+    padding: 0;
     border: 1px solid var(--border);
     border-radius: var(--radius-pill);
     background: var(--surface);
@@ -181,7 +182,6 @@ const { name: siteName, nav } = site;
     display: block;
     width: 20px;
     height: 2px;
-    margin: 4px 0;
     border-radius: var(--radius-pill);
     background: var(--text);
     transition:
@@ -213,7 +213,10 @@ const { name: siteName, nav } = site;
     }
 
     .nav-toggle {
-      display: grid;
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
     }
 
     .nav {
