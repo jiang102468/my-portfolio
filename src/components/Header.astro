@@ -150,20 +150,53 @@ const { name: siteName, nav } = site;
     width: 44px;
     height: 44px;
     margin-right: -8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      border-color var(--dur) var(--ease),
+      background-color var(--dur) var(--ease),
+      transform 0.15s var(--ease);
+  }
+
+  .nav-toggle:hover {
+    border-color: var(--accent);
+  }
+
+  .nav-toggle:active {
+    transform: scale(0.94);
+  }
+
+  .nav-toggle.is-active {
+    border-color: var(--text);
+    background: var(--text);
   }
 
   .nav-toggle-line {
     display: block;
-    width: 20px;
+    width: 18px;
     height: 2px;
-    margin: 2px 0;
-    border-radius: 2px;
+    margin: 1.5px 0;
+    border-radius: var(--radius-pill);
     background: var(--text);
-    transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+    transition:
+      transform var(--dur) var(--ease),
+      opacity var(--dur) var(--ease),
+      background-color var(--dur) var(--ease);
+  }
+
+  /* 中间一杠稍短，形成有节奏的图标，而非三根等长线段 */
+  .nav-toggle-line:nth-child(2) {
+    width: 12px;
   }
 
   .nav-toggle.is-active .nav-toggle-line:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
+    transform: translateY(5px) rotate(45deg);
+  }
+
+  .nav-toggle.is-active .nav-toggle-line {
+    background: var(--bg);
   }
 
   .nav-toggle.is-active .nav-toggle-line:nth-child(2) {
@@ -171,7 +204,7 @@ const { name: siteName, nav } = site;
   }
 
   .nav-toggle.is-active .nav-toggle-line:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
+    transform: translateY(-5px) rotate(-45deg);
   }
 
   /* 深色模式 fallback（color-mix 不支持时） */
