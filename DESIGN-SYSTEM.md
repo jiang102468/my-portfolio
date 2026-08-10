@@ -1,9 +1,12 @@
 # 设计规范（Design System）
 
-这份文档是本站点的**唯一设计依据**，风格参考 Apple 官网设计分析
-（`DESIGN.md`）。所有颜色、字号、圆角、阴影、组件样式都以
-`src/styles/global.css` 顶部的 CSS 变量为准，改样式只改这里，
-组件里不要写死色值 / 圆角 / 字号。
+**UI 设计规范以 `DESIGN.md` 为准**（Apple 设计语言：单一 Action Blue、明暗瓦片节奏、
+SF Pro 排版、无装饰阴影、`scale(0.95)` 按压等）。本文档（`DESIGN-SYSTEM.md`）与
+`DESIGN.md` 在 UI 设计上**冲突的地方，以 `DESIGN.md` 为准**；`DESIGN.md` 未明确
+规定的部分（如 token 映射、组件实现细节、无障碍约定），可按本文档执行。
+
+所有颜色、字号、圆角、阴影、组件样式都以 `src/styles/global.css` 顶部的
+CSS 变量为准，改样式只改这里，组件里不要写死色值 / 圆角 / 字号。
 
 ## 设计原则
 

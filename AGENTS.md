@@ -13,8 +13,9 @@
 - 样式：设计 token（颜色/圆角/动效）集中在 `src/styles/global.css` 顶部，
   深色模式在同文件 `@media (prefers-color-scheme: dark)` 中覆盖变量
 - **UI 设计规范参考 `DESIGN.md`**（Apple 设计语言：单一 Action Blue、明暗瓦片节奏、
-  SF Pro 排版、无装饰阴影、`scale(0.95)` 按压等）。`DESIGN-SYSTEM.md` 中
-  **与 `DESIGN.md` 冲突的 UI 设计部分以 `DESIGN.md` 为准，逐步弃用**；
+  SF Pro 排版、无装饰阴影、`scale(0.95)` 按压等）。`DESIGN-SYSTEM.md` 与
+  `DESIGN.md` 在 UI 设计上**冲突的地方以 `DESIGN.md` 为准**；`DESIGN.md` 未明确
+  规定的部分（token 映射、组件实现、无障碍约定等）可按 `DESIGN-SYSTEM.md` 执行；
   组件库全局类（`.btn` / `.tag` / `.eyebrow` 等）在 `global.css` 维护，组件内不要重复定义
 
 ## 必须遵守的约定
