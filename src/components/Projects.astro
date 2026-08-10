@@ -1,33 +1,37 @@
 ---
-// 作品展示区块：从 content collection 读取项目
+// 作品展示区块：明暗瓦片堆叠（Apple 画廊节奏）
 // 项目内容在 src/content/projects/*.md 中维护
 import { getCollection } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
+import { site } from '../site.config';
 
 const projects = (await getCollection('projects')).sort(
   (a, b) => (b.data.year || '').localeCompare(a.data.year || ''),
 );
+
+// 瓦片节奏：深 → 浅 → 深（色块切换即分区分隔）
+const tones = ['dark', 'light', 'dark-alt'] as const;
 ---
 
-<section id="work" class="section work">
+<section id="work" class="work">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">01 / Work</span>
-      <h2 class="section-title">精选作品</h2>
+      <span class="eyebrow">{site.projects.eyebrow}</span>
+      <h2 class="section-title">{site.projects.title}</h2>
     </div>
 
     {
       projects.length > 0 ? (
-        <div class="work-grid">
+        <div class="work-stack">
           {
-            projects.map((project) => (
-              <ProjectCard project={project} />
+            projects.map((project, index) => (
+              <ProjectCard project={project} tone={tones[index % tones.length]} />
             ))
           }
         </div>
       ) : (
         <p class="empty-hint">
-          暂无作品 — 在 <code>src/content/projects/</code> 中添加 markdown 文件即可展示。
+          {site.projects.emptyHint}
         </p>
       )
     }
@@ -35,19 +39,13 @@ const projects = (await getCollection('projects')).sort(
 </section>
 
 <style>
-  .work-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(28px, 4vw, 56px) clamp(24px, 3vw, 40px);
+  .work {
+    padding-block: var(--space-section) 0;
   }
 
-  /* 首个项目跨两列（大图展示） */
-  .work-grid > :first-child {
-    grid-column: 1 / -1;
-  }
-
-  .work-grid > :first-child .title {
-    font-size: clamp(20px, 2.5vw, 26px);
+  .work-stack {
+    display: flex;
+    flex-direction: column;
   }
 
   .empty-hint {
@@ -64,15 +62,5 @@ const projects = (await getCollection('projects')).sort(
     padding: 2px 8px;
     border-radius: var(--radius-sm);
     font-size: var(--text-sm);
-  }
-
-  /* 平板及以下单列 */
-  @media (max-width: 768px) {
-    .work-grid {
-      grid-template-columns: 1fr;
-    }
-    .work-grid > :first-child {
-      grid-column: auto;
-    }
   }
 </style>

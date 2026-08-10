@@ -1,5 +1,5 @@
 ---
-// 关于区块：简介 + 技能 + 经历时间线
+// 关于区块：简介 + 技能 + 经历（Apple 编辑式排版：引言 / 配置胶囊 / 参数行）
 // 文案统一在 src/site.config.ts 的 about 中维护
 import { site } from '../site.config';
 
@@ -43,7 +43,7 @@ const { lead, paragraphs, skills, timeline } = site.about;
             timeline.map((item) => (
               <li class="timeline-item">
                 <span class="period">{item.period}</span>
-                <div>
+                <div class="timeline-body">
                   <p class="role">{item.role} · {item.company}</p>
                   <p class="note">{item.note}</p>
                 </div>
@@ -60,38 +60,39 @@ const { lead, paragraphs, skills, timeline } = site.about;
   .about-grid {
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    gap: clamp(40px, 6vw, 88px);
+    gap: clamp(48px, 6vw, 96px);
     align-items: start;
   }
 
+  /* 引言：28px / 400，Apple「lead」语法 */
   .about-intro .lead {
-    font-size: clamp(19px, 2.4vw, 24px);
-    line-height: 1.8;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    margin-bottom: 24px;
+    font-size: clamp(22px, 2.6vw, 28px);
+    font-weight: 400;
+    letter-spacing: 0.196px;
+    line-height: 1.14;
+    margin-bottom: 28px;
   }
 
   .about-intro .lead em {
     font-style: normal;
-    color: var(--accent);
+    font-weight: 600;
   }
 
   .about-intro p:not(.lead) {
     color: var(--text-secondary);
-    line-height: 2;
+    line-height: 1.6;
     margin-bottom: 16px;
   }
 
   .side-title {
-    color: var(--text-tertiary);
     margin: 0 0 20px;
   }
 
   .about-side .side-title:not(:first-child) {
-    margin-top: 44px;
+    margin-top: 52px;
   }
 
+  /* 技能：白底胶囊 + 发丝线（Apple configurator chip） */
   .skill-list {
     display: flex;
     flex-wrap: wrap;
@@ -99,10 +100,10 @@ const { lead, paragraphs, skills, timeline } = site.about;
   }
 
   .skill-item {
-    font-size: var(--text-md);
-    padding: 7px 16px;
+    font-size: var(--text-sm);
+    padding: 8px 16px;
     border-radius: var(--radius-pill);
-    background: var(--surface);
+    background: var(--bg);
     border: 1px solid var(--border);
     transition:
       border-color var(--dur) var(--ease),
@@ -114,54 +115,59 @@ const { lead, paragraphs, skills, timeline } = site.about;
     color: var(--accent);
   }
 
+  /* 经历：参数行式（左侧年份 + 右侧责任），发丝线分隔 */
   .timeline {
-    position: relative;
-    padding-left: 20px;
-    border-left: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    gap: 24px;
   }
 
   .timeline-item {
-    position: relative;
+    display: grid;
+    grid-template-columns: 128px minmax(0, 1fr);
+    gap: 18px;
+    padding: 18px 0;
+    border-top: 1px solid var(--border);
   }
 
-  .timeline-item::before {
-    content: "";
-    position: absolute;
-    left: -25px;
-    top: 6px;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: var(--surface);
-    border: 2px solid var(--accent);
+  .timeline-item:last-child {
+    border-bottom: 1px solid var(--border);
   }
 
   .period {
-    font-family: var(--font-mono);
     font-size: var(--text-xs);
-    color: var(--text-tertiary);
-    letter-spacing: 0.04em;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    letter-spacing: -0.12px;
+    padding-top: 3px;
   }
 
   .role {
     font-size: var(--text-md);
     font-weight: 600;
-    margin-top: 4px;
+    letter-spacing: -0.374px;
   }
 
   .note {
     font-size: var(--text-sm);
     color: var(--text-secondary);
     margin-top: 3px;
+    line-height: 1.5;
+    letter-spacing: -0.224px;
   }
 
   /* 平板及以下单列 */
   @media (max-width: 1024px) {
     .about-grid {
       grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+
+  /* 手机：经历行改为上下两行 */
+  @media (max-width: 640px) {
+    .timeline-item {
+      grid-template-columns: 1fr;
+      gap: 4px;
     }
   }
 </style>
