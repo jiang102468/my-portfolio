@@ -1,88 +1,75 @@
 ---
-// 联系区块：大 CTA + 联系方式
+// 联系区块：纯黑沉浸瓦片 + 居中大字 + 胶囊 CTA（Apple 深色编辑页语法）
 // 文案与链接统一在 src/site.config.ts 的 contact 中维护
 import { site } from '../site.config';
 
 const { heading, subheading, email, ctaLabel, socials } = site.contact;
 ---
 
-<section id="contact" class="section contact">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">03 / Contact</span>
-      <h2 class="section-title">保持联系</h2>
-    </div>
+<section id="contact" class="contact tile-void">
+  <div class="container contact-inner">
+    <p class="eyebrow contact-eyebrow fade-up">03 / Contact</p>
+    <h2 class="contact-title fade-up fade-up-1">
+      {heading}
+      <br />
+      <span>{subheading}</span>
+    </h2>
 
-    <div class="contact-panel">
-      <h3 class="contact-title">
-        {heading}
-        <br />
-        <span>{subheading}</span>
-      </h3>
-      <a href={`mailto:${email}`} class="btn btn-primary contact-btn">
-        {ctaLabel}
-      </a>
+    <a href={`mailto:${email}`} class="btn btn-primary contact-btn fade-up fade-up-2">
+      {ctaLabel}
+    </a>
 
-      <ul class="social-list">
-        {
-          socials.map((social) => (
-            <li>
-              <a href={social.href} target="_blank" rel="noreferrer" class="text-link">
-                {social.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+    <ul class="social-list fade-up fade-up-3">
+      {
+        socials.map((social) => (
+          <li>
+            <a href={social.href} target="_blank" rel="noreferrer" class="text-link">
+              {social.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
 
 <style>
-  .contact-panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    padding: clamp(40px, 7vw, 88px) clamp(28px, 5vw, 72px);
-    position: relative;
-    overflow: hidden;
+  .contact {
+    padding-block: clamp(88px, 12vw, 152px);
   }
 
-  .contact-panel::after {
-    content: "";
-    position: absolute;
-    right: -120px;
-    bottom: -120px;
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      color-mix(in srgb, var(--accent) 16%, transparent),
-      transparent 70%
-    );
-    pointer-events: none;
+  .contact-inner {
+    max-width: 640px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .contact-eyebrow {
+    margin-bottom: 24px;
   }
 
   .contact-title {
-    font-size: clamp(30px, 5vw, 52px);
+    font-size: clamp(34px, 5.5vw, 56px);
     font-weight: 600;
-    letter-spacing: -0.025em;
-    line-height: 1.2;
+    letter-spacing: -0.02em;
+    line-height: 1.14;
   }
 
   .contact-title span {
-    color: var(--text-secondary);
+    color: var(--on-inverse-muted);
+    font-weight: 400;
   }
 
   .contact-btn {
     margin-top: 40px;
+    min-width: 200px;
   }
 
   .social-list {
     margin-top: 56px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 12px 32px;
   }
 
