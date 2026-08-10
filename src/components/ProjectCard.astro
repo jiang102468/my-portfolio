@@ -77,7 +77,7 @@ const tileClass = {
   .work-title {
     font-size: clamp(30px, 4.5vw, 40px);
     font-weight: 600;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
     line-height: 1.1;
   }
 
@@ -85,7 +85,8 @@ const tileClass = {
     margin-top: 14px;
     font-size: var(--text-lg);
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.19;
+    letter-spacing: 0.231px;
     max-width: 42ch;
   }
 
@@ -146,7 +147,7 @@ const tileClass = {
     background: rgb(210 210 215 / 0.64);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-    color: #1d1d1f;
+    color: var(--on-inverse);
     font-size: 18px;
     opacity: 0;
     transform: translateY(6px);

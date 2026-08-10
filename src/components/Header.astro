@@ -72,7 +72,7 @@ const { name: siteName, nav } = site;
   .logo-text {
     font-size: var(--text-md);
     font-weight: 600;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.374px;
   }
 
   .nav ul {
@@ -83,6 +83,7 @@ const { name: siteName, nav } = site;
 
   .nav-link {
     font-size: var(--text-xs); /* Apple 全局导航 12px */
+    letter-spacing: -0.12px;
     color: var(--text-secondary);
     min-height: 40px;          /* 触控目标 ≥40px */
     display: inline-flex;
@@ -90,12 +91,13 @@ const { name: siteName, nav } = site;
   }
 
   .nav-link:hover {
-    color: var(--text);
+    color: var(--accent);
   }
 
   /* 蓝色小胶囊 CTA：Apple「Buy」语法 */
   .nav-cta {
     font-size: var(--text-sm);
+    letter-spacing: -0.224px;
     min-height: 32px;
     padding: 6px 16px;
     border-radius: var(--radius-pill);
@@ -113,7 +115,7 @@ const { name: siteName, nav } = site;
   }
 
   .nav-cta:active {
-    transform: scale(0.97);
+    transform: scale(0.95);
   }
 
   /* 汉堡按钮：无边框极简三条线，视觉 36px、触控热区 44px */
@@ -134,7 +136,7 @@ const { name: siteName, nav } = site;
   }
 
   .nav-toggle:active {
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
 
   .nav-toggle-line {

@@ -31,7 +31,7 @@ const year = new Date().getFullYear();
           {
             site.contact.socials.map((social) => (
               <li>
-                <a href={social.href} target="_blank" rel="noreferrer" class="footer-link">
+                <a href={social.href} target="_blank" rel="noreferrer noopener" class="footer-link">
                   {social.label}
                 </a>
               </li>
@@ -67,33 +67,35 @@ const year = new Date().getFullYear();
   .footer-name {
     font-size: var(--text-md);
     font-weight: 600;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.374px;
   }
 
   .footer-tagline {
     margin-top: 6px;
     font-size: var(--text-xs);
+    letter-spacing: -0.12px;
     color: var(--text-secondary);
   }
 
-  /* 密集链接列：Apple dense-link（12px / 行高 2.4） */
+  /* 密集链接列：Apple dense-link（17px / 行高 2.41） */
   .footer-col ul {
     display: flex;
     flex-direction: column;
-    line-height: 2.4;
+    line-height: 2.41;
   }
 
   .footer-link {
     display: inline-block;
-    font-size: var(--text-xs);
+    font-size: var(--text-md);   /* dense-link：17px */
+    line-height: 2.41;
     color: var(--text-secondary);
-    min-height: 32px;           /* 触控目标 ≥32px（文字窄链接） */
-    line-height: 32px;
+    min-height: 32px;           /* 触控目标 ≥32px */
+    padding: 2px 0;
     transition: color var(--dur) var(--ease);
   }
 
   .footer-link:hover {
-    color: var(--text);
+    color: var(--accent);
   }
 
   .footer-bottom {
@@ -109,6 +111,7 @@ const year = new Date().getFullYear();
 
   .copyright {
     font-size: var(--text-xs);
+    letter-spacing: -0.12px;
     color: var(--text-secondary);
   }
 
@@ -123,6 +126,6 @@ const year = new Date().getFullYear();
   }
 
   .back-top:hover {
-    color: var(--text);
+    color: var(--accent);
   }
 </style>
