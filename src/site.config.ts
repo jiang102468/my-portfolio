@@ -57,6 +57,8 @@ export const site: {
     subheading: string;
     email: string;
     ctaLabel: string;
+    pdfLabel: string;
+    pdfHref: string;
     socials: NavLink[];
   };
   projects: {
@@ -77,10 +79,11 @@ export const site: {
   },
 
   nav: {
+    // 导航去重：联系入口只保留右上角 CTA「找我聊聊」，导航栏不再重复放「联系」
     items: [
+      { label: "作品集", href: "/portfolio/" },
       { label: "作品", href: "/#work" },
       { label: "关于", href: "/#about" },
-      { label: "联系", href: "/#contact" },
     ],
     cta: { label: "找我聊聊", href: "/#contact" },
   },
@@ -94,7 +97,7 @@ export const site: {
     description:
       "专注于界面设计与用户体验，擅长将复杂的业务需求转化为简洁、优雅、可落地的产品设计。曾服务于 B 端、C 端与移动端产品。",
     primaryCta: { label: "查看作品", href: "#work" },
-    secondaryCta: { label: "联系我", href: "#contact" },
+    secondaryCta: { label: "在线预览作品集", href: "/portfolio/" },
     meta: [
       { label: "所在地", value: location },
       { label: "邮箱", value: email, href: `mailto:${email}` },
@@ -146,6 +149,9 @@ export const site: {
     subheading: "让我们一起聊聊。",
     email,
     ctaLabel: "发送邮件 →",
+    // 完整作品集 PDF 下载（public/portfolio.pdf）
+    pdfLabel: "下载完整 PDF 作品集",
+    pdfHref: "/portfolio.pdf",
     socials: [
       { label: "Email", href: `mailto:${email}` },
       { label: "Dribbble", href: "https://dribbble.com" },

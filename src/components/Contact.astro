@@ -3,7 +3,7 @@
 // 文案与链接统一在 src/site.config.ts 的 contact 中维护
 import { site } from '../site.config';
 
-const { heading, subheading, email, ctaLabel, socials } = site.contact;
+const { heading, subheading, email, ctaLabel, pdfLabel, pdfHref, socials } = site.contact;
 ---
 
 <section id="contact" class="contact tile-void">
@@ -15,9 +15,14 @@ const { heading, subheading, email, ctaLabel, socials } = site.contact;
       <span>{subheading}</span>
     </h2>
 
-    <a href={`mailto:${email}`} class="btn btn-primary contact-btn fade-up fade-up-2">
-      {ctaLabel}
-    </a>
+    <div class="contact-actions fade-up fade-up-2">
+      <a href={`mailto:${email}`} class="btn btn-primary contact-btn">
+        {ctaLabel}
+      </a>
+      <a href={pdfHref} download class="btn btn-outline contact-btn contact-pdf">
+        {pdfLabel} ↓
+      </a>
+    </div>
 
     <ul class="social-list fade-up fade-up-3">
       {
@@ -60,9 +65,28 @@ const { heading, subheading, email, ctaLabel, socials } = site.contact;
     font-weight: 400;
   }
 
-  .contact-btn {
+  .contact-actions {
     margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .contact-btn {
     min-width: 200px;
+  }
+
+  /* 深色瓦片上的次级按钮：透明底 + Sky Blue 描边 */
+  .contact-pdf {
+    background: transparent;
+    color: var(--accent-on-dark);
+    border-color: var(--border-inverse);
+  }
+
+  .contact-pdf:hover {
+    border-color: var(--accent-on-dark);
+    background: color-mix(in srgb, var(--on-inverse) 8%, transparent);
   }
 
   .social-list {

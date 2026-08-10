@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# 设计稿原始素材（体积大，不入库；由 scripts/optimize-portfolio.py 转成 WebP 进 public/portfolio/）
+pdf/
