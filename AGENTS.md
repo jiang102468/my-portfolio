@@ -12,7 +12,10 @@
   组件只负责展示，从该文件读取数据，不要再到组件里写散落的硬编码文案
 - 样式：设计 token（颜色/圆角/动效）集中在 `src/styles/global.css` 顶部，
   深色模式在同文件 `@media (prefers-color-scheme: dark)` 中覆盖变量
-- 设计规范：`DESIGN-SYSTEM.md` 是设计规范文档（token / 组件库 / 断点 / 无障碍），
+- **UI 设计规范参考 `DESIGN.md`**（Apple 设计语言：单一 Action Blue、明暗瓦片节奏、
+  SF Pro 排版、无装饰阴影、`scale(0.95)` 按压等）。`DESIGN-SYSTEM.md` 与
+  `DESIGN.md` 在 UI 设计上**冲突的地方以 `DESIGN.md` 为准**；`DESIGN.md` 未明确
+  规定的部分（token 映射、组件实现、无障碍约定等）可按 `DESIGN-SYSTEM.md` 执行；
   组件库全局类（`.btn` / `.tag` / `.eyebrow` 等）在 `global.css` 维护，组件内不要重复定义
 
 ## 必须遵守的约定
@@ -52,7 +55,7 @@
 - 没有改动 `package.json` / `package-lock.json` / `tsconfig.json`
 - 没有新增散落在组件中的硬编码文案（页面专属一次性内容除外）
 - 媒体查询只使用 640 / 768 / 1024 三档断点
-- CSS 变量新增/修改已同步至 `DESIGN-SYSTEM.md` 对应 Token 表
+- CSS 变量新增/修改已同步至 `global.css` 顶部 Token 表（规范值以 `DESIGN.md` 为准）
 - README「维护速查」与当前项目结构保持一致
 
 ## 渲染验证约定（Render-Before-Trust）

@@ -37,8 +37,13 @@ const { title, description, category, year, cover, tags, link } = project.data;
           )
         }
         {link && (
-          <a href={link} target="_blank" rel="noreferrer noopener" class="btn btn-primary visit-link">
-            访问项目 ↗
+          <a
+            href={link}
+            target={link.startsWith('http') ? '_blank' : undefined}
+            rel={link.startsWith('http') ? 'noreferrer noopener' : undefined}
+            class="btn btn-primary visit-link"
+          >
+            {link.startsWith('http') ? '访问项目 ↗' : '在作品集中查看 ↗'}
           </a>
         )}
       </header>

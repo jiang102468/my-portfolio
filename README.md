@@ -20,16 +20,23 @@ npm run preview    # 本地预览构建结果
 ```
 my-portfolio/
 ├── public/                      # 静态资源（项目封面图等放这里）
+│   ├── portfolio/               # ★ 作品集图片（cover.webp + pNN.webp，按项目分目录）
+│   ├── portfolio.pdf            # 完整作品集 PDF（下载入口）
 │   └── projects/
+├── scripts/
+│   └── optimize-portfolio.py    # 把 pdf/ 原图转 WebP 压缩到 public/portfolio/
+├── pdf/                         # 设计稿原图（PNG，不入库，本地素材）
 ├── src/
 │   ├── site.config.ts           # ★ 站点内容配置（名字/邮箱/社交/文案，维护入口）
+│   ├── data/
+│   │   └── portfolio.ts         # ★ 作品集查看器数据（项目元数据 + 图片清单）
 │   ├── components/
 │   │   ├── Header.astro         # 顶部导航 + 汉堡菜单
 │   │   ├── Hero.astro           # 首屏大标题
 │   │   ├── Projects.astro       # 作品网格
 │   │   ├── ProjectCard.astro    # 作品卡片
 │   │   ├── About.astro          # 关于我（技能 + 经历）
-│   │   ├── Contact.astro        # 联系方式
+│   │   ├── Contact.astro        # 联系方式（含 PDF 下载）
 │   │   └── Footer.astro         # 页脚
 │   ├── content/
 │   │   ├── config.ts            # 作品数据格式定义（schema）
@@ -38,6 +45,7 @@ my-portfolio/
 │   │   └── Layout.astro         # 页面骨架
 │   ├── pages/
 │   │   ├── index.astro          # 首页
+│   │   ├── portfolio/           # ★ 作品集在线查看器（仿 PDF 翻页）
 │   │   └── projects/            # 项目详情页（自动生成）
 │   └── styles/
 │       └── global.css           # 设计系统（Token / 组件库 / 断点）
@@ -96,6 +104,8 @@ cover: "/projects/封面图.png"
 | --- | --- |
 | 改站名 / 邮箱 / 社交链接 / 技能 / 经历 / 首屏文案 | `src/site.config.ts` |
 | 新增作品 | 复制 `src/content/projects/*.md`，改 frontmatter 和正文 |
+| 更新作品集查看器的项目元数据 / 图片清单 | `src/data/portfolio.ts` |
+| 更新作品集设计稿图片 | 替换 `pdf/` 原图后重跑 `scripts/optimize-portfolio.py`（转 WebP 到 `public/portfolio/`） |
 | 换主色调 | `src/styles/global.css` 中 `--accent` 变量 |
 | 改按钮 / 标签 / 小节标签样式 | `src/styles/global.css` 组件库段落 |
 | 改深色模式配色 | `src/styles/global.css` `@media (prefers-color-scheme: dark)` 段落 |

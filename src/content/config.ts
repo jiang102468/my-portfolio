@@ -17,8 +17,8 @@ const projects = defineCollection({
     cover: z.string().optional(),
     // 项目标签（可选）
     tags: z.array(z.string()).optional(),
-    // 在线链接（可选）
-    link: z.string().url().optional(),
+    // 在线链接：支持站内路径（如 /portfolio/#slug/1）或绝对 URL（可选）
+    link: z.string().optional(),
   }),
 });
 
