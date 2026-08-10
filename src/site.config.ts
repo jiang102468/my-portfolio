@@ -59,6 +59,12 @@ export const site: {
     ctaLabel: string;
     socials: NavLink[];
   };
+  projects: {
+    eyebrow: string;
+    title: string;
+    ctaLabel: string;
+    emptyHint: string;
+  };
 } = {
   name,
   email,
@@ -146,5 +152,13 @@ export const site: {
       { label: "Behance", href: "https://behance.net" },
       { label: "GitHub", href: "https://github.com" },
     ],
+  },
+
+  projects: {
+    eyebrow: "01 / Work",
+    title: "精选作品",
+    ctaLabel: "查看项目",
+    emptyHint:
+      "暂无作品 — 在 src/content/projects/ 中添加 markdown 文件即可展示。",
   },
 };

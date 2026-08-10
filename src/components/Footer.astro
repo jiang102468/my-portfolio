@@ -1,33 +1,118 @@
 ---
-// 页脚：版权 + 年份
+// 页脚：Apple 式密集信息页脚（12px 链接列 + 法律底行）
+// 链接数据复用 site.config.ts 的 nav / contact
 import { site } from '../site.config';
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="container footer-inner">
-    <p class="copyright">© {year} {site.name} · 保留所有权利</p>
-    <a href="#main" class="back-top">回到顶部 ↑</a>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="footer-name">{site.name}</p>
+        <p class="footer-tagline">{site.direction} · {site.location}</p>
+      </div>
+
+      <nav class="footer-col" aria-label="站点导航">
+        <ul>
+          {
+            site.nav.items.map((item) => (
+              <li>
+                <a href={item.href} class="footer-link">{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="footer-col">
+        <ul>
+          {
+            site.contact.socials.map((social) => (
+              <li>
+                <a href={social.href} target="_blank" rel="noreferrer noopener" class="footer-link">
+                  {social.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright">© {year} {site.name} · 保留所有权利</p>
+      <a href="#main" class="back-top">回到顶部 ↑</a>
+    </div>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    border-top: 1px solid var(--border);
-    padding-block: 28px;
+    background: var(--surface);
+    padding-block: 48px 24px;
   }
 
-  .footer-inner {
+  .footer-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px 72px;
+  }
+
+  .footer-brand {
+    flex: 1 1 240px;
+  }
+
+  .footer-name {
+    font-size: var(--text-md);
+    font-weight: 600;
+    letter-spacing: -0.374px;
+  }
+
+  .footer-tagline {
+    margin-top: 6px;
+    font-size: var(--text-xs);
+    letter-spacing: -0.12px;
+    color: var(--text-secondary);
+  }
+
+  /* 密集链接列：Apple dense-link（17px / 行高 2.41） */
+  .footer-col ul {
+    display: flex;
+    flex-direction: column;
+    line-height: 2.41;
+  }
+
+  .footer-link {
+    display: inline-block;
+    font-size: var(--text-md);   /* dense-link：17px */
+    line-height: 2.41;
+    color: var(--text-secondary);
+    min-height: 32px;           /* 触控目标 ≥32px */
+    padding: 2px 0;
+    transition: color var(--dur) var(--ease);
+  }
+
+  .footer-link:hover {
+    color: var(--accent);
+  }
+
+  .footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
+    flex-wrap: wrap;
   }
 
   .copyright {
-    font-size: var(--text-sm);
-    color: var(--text-tertiary);
+    font-size: var(--text-xs);
+    letter-spacing: -0.12px;
+    color: var(--text-secondary);
   }
 
   .back-top {
@@ -35,7 +120,7 @@ const year = new Date().getFullYear();
     align-items: center;
     min-height: 40px;            /* WCAG 2.2 AA 触控目标 ≥40px */
     gap: 6px;
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     color: var(--text-secondary);
     transition: color var(--dur) var(--ease);
   }
